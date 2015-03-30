@@ -185,7 +185,8 @@ public class AggieHome {
             		 phi=new Array2DRowRealMatrix(new double[][] {{1},{0},{0}});
             		 lambda=0.00001;
             		 
-            		 theta=new Array2DRowRealMatrix(new double[][] {{3.2},{0.01},{0.01},{soh},{40},{3.506},{0.1072},{-0.02725},{-0.3192},{0.1145}});
+            		 theta=new Array2DRowRealMatrix(new double[][] {{3.2},{0.01},{0.01},{soh},{40},{3.584},{0.1743},{-0.04125},{-0.3669},{0.02217}});
+            				 										//{3.506},{0.1072},{-0.02725},{-0.3192},{0.1145}});
             		                                               // 0:voltage, 1:ro, 2:rs, 3:soh, 4:cap--ah, 5~9:ocv
             		 x=new Array2DRowRealMatrix(new double[][] {{0.8},{0}});
             		 vx=new Array2DRowRealMatrix(new double[][] {{0.01,0},{0,0.01}});
