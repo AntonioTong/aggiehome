@@ -67,7 +67,7 @@ public class EnergyMgmt2 {
 	}
 	public void stp2(AggieHome home){
 		double soh=0;
-		if(home.battery.socSuper>this.logStart1[0]  & done==false)
+		if(home.battery.socSuper>this.logEnd1[0]  & done==false)
 		{
 		   this.netZero(home);
 		   double powerDisbute=Math.abs(home.pB-this.power);

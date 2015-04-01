@@ -52,8 +52,8 @@ public class AggieHome {
 		double socSuper,sohSuper;
 		double charge=0,discharge=0;
 		// here soh is 1/soh numericalwise
-		double soh[]= {360.0/297, 360.0/284, 360.0/280, 360.0/276, 360.0/280, 360.0/275, 
-				360.0/268, 360.0/292, 360.0/276, 360.0/273, 360.0/264, 360.0/280, 360.0/299, 360.0/263, 360.0/285};
+		double soh[]= {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 
+				1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58};
     	Battery.Cell[] cell=new Battery.Cell[nS];
     	//
     	
@@ -156,7 +156,8 @@ public class AggieHome {
             	double out=theta.getEntry(5, 0)*0+ 
 	    			theta.getEntry(6, 0)*(1/(0.01+x.getEntry(0, 0)))+
 	    			theta.getEntry(7, 0)*(-1/(1.01-x.getEntry(0, 0)))+
-	    			theta.getEntry(8, 0);
+	    			theta.getEntry(8, 0)+
+	    			2*theta.getEntry(9, 0)*Math.pow(x.getEntry(0, 0),2);
             return 	out;	
             }
             public double InvOCV(RealMatrix theta,double ocv_mes){
@@ -254,8 +255,8 @@ public class AggieHome {
                     theta.setEntry(2, 0, theta_rls.getEntry(2, 0));
                     if (theta.getEntry(1, 0)<0.001) theta.setEntry(1, 0,0.001);
                     if (theta.getEntry(2, 0)<0.001) theta.setEntry(2, 0,0.001);
-                    if (theta.getEntry(1, 0)>0.1) theta.setEntry(1, 0,0.1);
-                    if (theta.getEntry(2, 0)>0.1) theta.setEntry(2, 0,0.1);
+                    if (theta.getEntry(1, 0)>0.05) theta.setEntry(1, 0,0.1);
+                    if (theta.getEntry(2, 0)>0.05) theta.setEntry(2, 0,0.1);
                     
                     rlscnt=rlscnt+1;
                     if (rlscnt==20){
