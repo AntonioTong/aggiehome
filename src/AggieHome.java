@@ -191,7 +191,7 @@ public class AggieHome {
             		                                               // 0:voltage, 1:ro, 2:rs, 3:soh, 4:cap--ah, 5~9:ocv
             		 x=new Array2DRowRealMatrix(new double[][] {{0.8},{0}});
             		 vx=new Array2DRowRealMatrix(new double[][] {{0.01,0},{0,0.01}});
-            		 vw=new Array2DRowRealMatrix(new double[][] {{0.0000001,0},{0,0.0000001}});
+            		 vw=new Array2DRowRealMatrix(new double[][] {{0.000001,0},{0,0.1}});
             		 l=new Array2DRowRealMatrix(new double[][] {{0.001},{0.001}});
             		 vv=new Array2DRowRealMatrix(new double[][] {{10}});
             		 rlscnt=1;

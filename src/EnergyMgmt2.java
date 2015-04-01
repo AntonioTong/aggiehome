@@ -51,8 +51,9 @@ public class EnergyMgmt2 {
 		if(home.battery.socSuper<0.95  & done==false)
 		{
 			this.netZero(home);
-			double powerDisbute=Math.abs(home.pB-this.power);
-			if (this.power<0 |  powerDisbute>500){this.setPower(home,0.1);}
+		//	double powerDisbute=Math.abs(home.pB-this.power);
+			if (this.power<0 ){this.power=0.1;}
+			this.setPower(home,this.power);
 			done=false;
 		}
 		if((home.battery.socSuper>0.95|home.battery.vMax>3.64) & done==false){
@@ -70,8 +71,9 @@ public class EnergyMgmt2 {
 		if(home.battery.socSuper>this.logEnd1[0]  & done==false)
 		{
 		   this.netZero(home);
-		   double powerDisbute=Math.abs(home.pB-this.power);
-		   if (this.power>0 |  powerDisbute>500){this.power=-2;}
+		   // double powerDisbute=Math.abs(home.pB-this.power);
+		   // no power disbute assumed
+		    if (this.power>0 ){this.power=-2;}
 		   this.setPower(home,this.power);
 		   done=false;
 		}
@@ -81,7 +83,7 @@ public class EnergyMgmt2 {
 		    this.setPower(home,this.power=2);
 		}
 		step=2;
-		if (home.time.timeHour>=20){
+		if (home.time.timeHour>=21){
 			dayilyYieldSet(home);
 			step=3;done=false;}
 	}
