@@ -70,7 +70,7 @@ public class Main {
 		    	smaPort2.setParameters(energyMgmt2.power);
 		 // step 4. variables print out & data logging
 			    printOut.SetPrint(home,canPort,energyMgmt2);
-			    writeToFile.SetDatalog(home);
+			    writeToFile.SetDatalog(home,energyMgmt2);
 			    writeToDB.setDataBase(home);
 		}
 	}
