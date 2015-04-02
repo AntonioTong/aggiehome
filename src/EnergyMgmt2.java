@@ -3,7 +3,7 @@ import java.util.Calendar;
 
 public class EnergyMgmt2 {
 	public double power=0.1; // power is the control output, meaning the capacity of the system 
-	public int mode=0,modeBefore=0,modeAfter=0,step=0,stepBefore=0,stepAfter=0; //mode is used to switch between difference control types
+	public int mode=0,modeBefore=0,modeAfter=0,step=2,stepBefore=0,stepAfter=0; //mode is used to switch between difference control types
 	public double[] logStart1= new double[15], logEnd1= new double[15]; // logs 
 	public double[] logStart2= new double[15], logEnd2= new double[15]; // logs 
 	boolean done=false;
@@ -71,19 +71,17 @@ public class EnergyMgmt2 {
 		if(home.battery.socSuper>this.logEnd1[0]  & done==false)
 		{
 		   this.netZero(home);
-		   // double powerDisbute=Math.abs(home.pB-this.power);
-		   // no power disbute assumed
 		    if (this.power>0 ){this.power=-2;}
 		   this.setPower(home,this.power);
 		   done=false;
 		}
-		if((home.battery.socSuper<this.logEnd1[0] |home.battery.vMin<2.8) & done==false)
+		if((home.battery.socSuper<this.logEnd1[0] | home.battery.vMin<2.8) & done==false)
 		{   
 			done=true;
 		    this.setPower(home,this.power=2);
 		}
 		step=2;
-		if (home.time.timeHour>=21){
+		if (home.time.timeHour>=22){
 			dayilyYieldSet(home);
 			step=3;done=false;}
 	}
@@ -91,7 +89,7 @@ public class EnergyMgmt2 {
 		step=3;
 		this.power=3;
 		   this.setPower(home,this.power);
-		if (home.time.timeHour>=22 | home.time.timeHour<12){
+		if (home.time.timeHour>=23 | home.time.timeHour<12){
 			dayilyYieldStart(home);
 			step=0;}
 	}
@@ -114,8 +112,10 @@ public class EnergyMgmt2 {
 	// netZero set the power of the EnergyMgmt to zero utility usage
 	public void netZero(AggieHome home){
 		if(home.pG!=home.pGold){
-		    double pow=this.power+(home.pG*0.2);//+(home.pG-home.pGold)+(home.pP-home.pPold)
-		    this.power=pow;
+		    double pow=home.pG*0.4;//+(home.pG-home.pGold)+(home.pP-home.pPold)
+		    if(pow>500){pow=500;}
+		    if(pow<-500){pow=-500;}
+		    this.power=this.power+pow;
 		}
 	}
 	// daily yield calculates 

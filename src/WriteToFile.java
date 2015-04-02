@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WriteToFile {
-	public void SetDatalog(AggieHome home){
+	public void SetDatalog(AggieHome home,EnergyMgmt2 energyMgmt2){
 		// here we write the data to a txt file
 	       try{  
 	    	   SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
@@ -28,7 +28,9 @@ public class WriteToFile {
 	           //out.write(","+String.format("%4", home.time.timeHour));
 	           //out.write(","+String.format("%4", home.time.timeMinute));
 	           //out.write(","+String.format("%4", home.time.timeSecond));
-	           out.write(","+String.format("%.4f", home.time.timeNow));
+	           out.write(","+String.format("%.2f", home.time.timeNow));
+	           out.write(","+String.format("%.2f", home.time.timeHour));
+	           out.write(","+String.format("%.2f", home.time.timeMinute));
 	           // then battery data
 	           out.write(","+String.format("%.2f", home.battery.vMax));
 	           out.write(","+String.format("%.2f", home.battery.vMin));
@@ -42,6 +44,10 @@ public class WriteToFile {
 	           out.write(","+String.format("%.1f", home.pG));
 	           out.write(","+String.format("%.1f", home.pH));
 	           out.write(","+String.format("%.1f", home.pP));
+	           out.write(","+String.format("%.1f", energyMgmt2.step));
+	           out.write(","+String.format("%.1f", energyMgmt2.power));
+	           out.write(","+String.format("%.2f", energyMgmt2.logEnd1[0]));
+	           
 	           // control data
 	           for (int p = 0; p < home.battery.nS; p++){
 	           out.write(","+String.format("%.4f", home.battery.cell[p].c));

@@ -49,7 +49,7 @@ class MultiThread {
     public synchronized void CloudThread() throws IOException {
     	// step 4. variables print out & data logging
 	    printOut.SetPrint(home,canPort,energyMgmt2);
-	    writeToFile.SetDatalog(home);
+	    writeToFile.SetDatalog(home, energyMgmt2);
 	    writeToDB.setDataBase(home);
 	    //System.out.println("Thread CLOUD");
         notify();
