@@ -29,8 +29,8 @@ public class WriteToFile {
 	           //out.write(","+String.format("%4", home.time.timeMinute));
 	           //out.write(","+String.format("%4", home.time.timeSecond));
 	           out.write(","+String.format("%.2f", home.time.timeNow));
-	           out.write(","+String.format("%.2f", home.time.timeHour));
-	           out.write(","+String.format("%.2f", home.time.timeMinute));
+	           out.write(","+String.format("%03d", home.time.timeHour));
+	           out.write(","+String.format("%03d", home.time.timeMinute));
 	           // then battery data
 	           out.write(","+String.format("%.2f", home.battery.vMax));
 	           out.write(","+String.format("%.2f", home.battery.vMin));
@@ -44,7 +44,7 @@ public class WriteToFile {
 	           out.write(","+String.format("%.1f", home.pG));
 	           out.write(","+String.format("%.1f", home.pH));
 	           out.write(","+String.format("%.1f", home.pP));
-	           out.write(","+String.format("%.1f", energyMgmt2.step));
+	           out.write(","+String.format("%03d", energyMgmt2.step));
 	           out.write(","+String.format("%.1f", energyMgmt2.power));
 	           out.write(","+String.format("%.2f", energyMgmt2.logEnd1[0]));
 	           

@@ -56,9 +56,14 @@ public class EnergyMgmt2 {
 			this.setPower(home,this.power);
 			done=false;
 		}
-		if((home.battery.socSuper>0.95|home.battery.vMax>3.64) & done==false){
+		else if((home.battery.socSuper>0.95|home.battery.vMax>3.64) & done==false){
 			this.setPower(home,this.power=-2);
 			done=true;
+		}
+		else
+		{   
+			done=true;
+		    this.setPower(home,this.power=2);
 		}
 		step=1;
 		if (home.time.timeHour>=14){
@@ -75,7 +80,12 @@ public class EnergyMgmt2 {
 		   this.setPower(home,this.power);
 		   done=false;
 		}
-		if((home.battery.socSuper<this.logEnd1[0] | home.battery.vMin<2.8) & done==false)
+		else if((home.battery.socSuper<this.logEnd1[0] | home.battery.vMin<2.8) & done==false)
+		{   
+			done=true;
+		    this.setPower(home,this.power=2);
+		}
+		else
 		{   
 			done=true;
 		    this.setPower(home,this.power=2);
@@ -99,12 +109,12 @@ public class EnergyMgmt2 {
 		    if (this.power>2000){this.power=2000;}
 		    if (this.power<-2000){this.power=-2000;}
 			if (home.battery.vMin<2.80 | this.chCnt>1){
-				this.power=500;
+				this.power=50;
 				this.chCnt=this.chCnt-1;
 				if(home.battery.vMin<2.80){this.chCnt=21;}
 				}
 			if (home.battery.vMax>3.65 | this.dschCnt>1 ){
-				this.power=-500;
+				this.power=-50;
 				this.dschCnt=this.dschCnt-1;
 				if(home.battery.vMax>3.6){this.dschCnt=21;}
 				}
@@ -112,7 +122,7 @@ public class EnergyMgmt2 {
 	// netZero set the power of the EnergyMgmt to zero utility usage
 	public void netZero(AggieHome home){
 		if(home.pG!=home.pGold){
-		    double pow=home.pG*0.4;//+(home.pG-home.pGold)+(home.pP-home.pPold)
+		    double pow=home.pG*0.2;//+(home.pG-home.pGold)+(home.pP-home.pPold)
 		    if(pow>500){pow=500;}
 		    if(pow<-500){pow=-500;}
 		    this.power=this.power+pow;

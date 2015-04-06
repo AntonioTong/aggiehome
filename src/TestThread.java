@@ -82,7 +82,7 @@ class T2 implements Runnable {
 
     public void run() {
     	while (true) {
-   		 try {Thread.sleep(60000);}catch (InterruptedException e){e.printStackTrace();} 
+   		 try {Thread.sleep(20000);}catch (InterruptedException e){e.printStackTrace();} 
             m.HouseThread();
         }
     }
