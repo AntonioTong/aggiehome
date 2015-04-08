@@ -114,7 +114,7 @@ public class SMA{
     	float inverterCurrent = (float) ((-power/240.0) -0.3);
     	Channels channels = new Channels();
     	channels.setMeta("FedInCurAtCom");
-    	channels.setValue(String.format("%.2f", inverterCurrent));
+    	channels.setValue(String.format("%.1f", inverterCurrent));
     	List<Channels> ch = new ArrayList<Channels>();
     	ch.add(channels);
     	RespDevices devices = new RespDevices();
