@@ -2,7 +2,7 @@
 
 public class EnergyMgmt3 {
 	public double power=0.1; // power is the control output, meaning the capacity of the system 
-	public int mode=0,modeBefore=0,modeAfter=0,step=2,stepBefore=0,stepAfter=0; //mode is used to switch between difference control types
+	public int mode=0,modeBefore=0,modeAfter=0,step=1,stepBefore=0,stepAfter=0; //mode is used to switch between difference control types
 	public double[] logStart1= new double[15], logEnd1= new double[15]; // logs 
 	public double[] logStart2= new double[15], logEnd2= new double[15]; // logs 
 	boolean done=false;
@@ -28,7 +28,7 @@ public class EnergyMgmt3 {
 		
 			this.netZero(home);
 		//	double powerDisbute=Math.abs(home.pB-this.power);
-			
+			if (this.power>0 && home.time.timeHour>=14 && home.time.timeHour<=17){this.power=-1;}
 			this.setPower(home,this.power);
 			done=false;
 		
