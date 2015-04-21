@@ -1,5 +1,5 @@
 public class PrintOut {
-  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmt2 energyMgmt2){
+  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmt3 energyMgmt2){
 	  
 	  	if (home.mode==true & canPort.mode==true ){
 	   	 System.out.format("power %.2f ",energyMgmt2.power);

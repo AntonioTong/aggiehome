@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WriteToFile {
-	public void SetDatalog(AggieHome home,EnergyMgmt2 energyMgmt2){
+	public void SetDatalog(AggieHome home,EnergyMgmt3 energyMgmt2){
 		// here we write the data to a txt file
 	       try{  
 	    	   SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
