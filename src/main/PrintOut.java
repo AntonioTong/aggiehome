@@ -7,7 +7,7 @@ public class PrintOut {
 	  
 	  	if (home.mode==true & canPort.mode==true ){
 	   	 System.out.format("power %.2f ",energyMgmt2.getPower());
-	   	 System.out.format("step %d ",energyMgmt2.getPs());
+	   	 System.out.format("step %d ", 1); //energyMgmt2.getPs());
 	   	System.out.println(energyMgmt2.isDone());
 	  	 //System.out.format("socSet %.2f ",energyMgmt2.logEnd1[0]);
 		// time 
