@@ -1,3 +1,4 @@
+package main;
 
 public class EnergyMgmt1 {
 	double power=0; // power is the control output, meaning the capacity of the system 

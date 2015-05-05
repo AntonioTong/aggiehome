@@ -1,4 +1,7 @@
+package main;
 import java.io.IOException;
+
+import dr.EnergyMgmt4;
 
 import smaGson.SMA;
 import xml.XmlRead;
@@ -15,6 +18,7 @@ class MultiThread {
 	EnergyMgmt1 energyMgmt1 = new EnergyMgmt1();
 	EnergyMgmt2 energyMgmt2 = new EnergyMgmt2();// normal routing
 	EnergyMgmt3 energyMgmt3 = new EnergyMgmt3();// normal routing
+	EnergyMgmt4 energyMgmt4 = new EnergyMgmt4();
 	//generate classes for sma read/write, 
 	SMA smaPort2 = new SMA();
 	//and xml file read
@@ -42,15 +46,15 @@ class MultiThread {
  	    home.pG=obviusPort.va; // negative being back feeding
  	    home.pB=home.battery.cPack*home.battery.vPack;
 	    home.pH=home.pP-home.pB-home.pG;
-	    energyMgmt3.SetPower(home,canPort); //here sets power
-	    smaPort2.setParameters(energyMgmt3.power);
+	    energyMgmt4.SetPower(home,canPort); //here sets power
+	    smaPort2.setParameters(energyMgmt4.getPower());
 //    	System.out.println("Thread HOUSE");
         notify();
     }
     public synchronized void CloudThread() throws IOException {
     	// step 4. variables print out & data logging
-	    printOut.SetPrint(home,canPort,energyMgmt3);
-	    writeToFile.SetDatalog(home, energyMgmt3);
+	    printOut.SetPrint(home,canPort,energyMgmt4);
+	    writeToFile.SetDatalog(home, energyMgmt4);
 	    writeToDB.setDataBase(home);
 	    //System.out.println("Thread CLOUD");
         notify();

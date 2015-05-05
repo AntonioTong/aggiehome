@@ -1,11 +1,15 @@
+package main;
+
+import dr.EnergyMgmt4;
+
 public class PrintOut {
-  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmt3 energyMgmt2){
+  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmt4 energyMgmt2){
 	  
 	  	if (home.mode==true & canPort.mode==true ){
-	   	 System.out.format("power %.2f ",energyMgmt2.power);
-	   	 System.out.format("step %d ",energyMgmt2.step);
-	   	System.out.println(energyMgmt2.done);
-	  	 System.out.format("socSet %.2f ",energyMgmt2.logEnd1[0]);
+	   	 System.out.format("power %.2f ",energyMgmt2.getPower());
+	   	 System.out.format("step %d ",energyMgmt2.getPs());
+	   	System.out.println(energyMgmt2.isDone());
+	  	 //System.out.format("socSet %.2f ",energyMgmt2.logEnd1[0]);
 		// time 
 	  	 System.out.format("dt %.2f ", home.time.timeDt);
 		 System.out.print("\n");
@@ -22,7 +26,7 @@ public class PrintOut {
 		 System.out.print("\n");
 		 
 		 
-		 System.out.format("discharge lmt set as %.2f ", energyMgmt2.logEnd1[0]);
+		 //System.out.format("discharge lmt set as %.2f ", energyMgmt2.logEnd1[0]);
 		 System.out.print("\n");
 		 
 		 System.out.format("socSuper %.2f ", home.battery.socSuper);

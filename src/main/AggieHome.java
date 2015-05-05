@@ -1,3 +1,4 @@
+package main;
 import java.util.*;
 import java.text.*;
 
@@ -8,9 +9,14 @@ public class AggieHome {
 	// constructor for the battery system 
 		boolean mode=true;
     	AggieHome.Time time = new AggieHome.Time();
-    	AggieHome.Battery battery = new AggieHome.Battery();
+    	public AggieHome.Battery battery = new AggieHome.Battery();
     	
-    	double pH=0,pB=0,pP=0,pG=0,pHold=0,pBold=0,pPold=0,pGold=0; //(power of house battery pv and grid
+    	double pH=0,pB=0,pP=0; //(power of house battery pv and grid
+		public double pG=0;
+		double pHold=0;
+		double pBold=0;
+		double pPold=0;
+		public double pGold=0;
     	
     public AggieHome(){
     // construct battery pack
@@ -48,9 +54,38 @@ public class AggieHome {
     	// battery variables 
     	int nP = 9,nS =15,nW =3; double vPack=48,cPack=0; //(0 to 14)
 		double normV=3.2,normCap = 40,vHLmt=3.6, vLLmt=2.8, cHLmt=50, cLLmt=-50, bLmt=3.4; 
-		double vMax, vMin, tMax, tMin, socMax, socMin, sohMax, sohMin;
-		double socSuper,sohSuper;
+		public double vMax;
+		public double vMin;
+		double tMax;
+		double tMin;
+		double socMax;
+		double socMin;
+		double sohMax;
+		double sohMin;
+		public double socSuper;
+		double sohSuper;
 		double charge=0,discharge=0;
+		
+		
+		public double getvPack() {
+			return vPack;
+		}
+		public double getvMax() {
+			return vMax;
+		}
+		public double getvMin() {
+			return vMin;
+		}
+		public double getSohMax() {
+			return sohMax;
+		}
+		public double getSohMin() {
+			return sohMin;
+		}
+		public double getSohSuper() {
+			return sohSuper;
+		}
+
 		// here soh is 1/soh numericalwise
 		double soh[]= {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 
 				1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58};

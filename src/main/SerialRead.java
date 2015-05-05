@@ -1,3 +1,4 @@
+package main;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 

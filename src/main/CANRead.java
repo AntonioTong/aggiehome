@@ -1,7 +1,10 @@
+package main;
 import peak.can.basic.*;
 
 public class CANRead {
-	boolean mode = true, vtgReadErr = true, tmpReadErr = true;
+	public boolean mode = true;
+	boolean vtgReadErr = true;
+	boolean tmpReadErr = true;
 
 	public AggieHome ReadCAN(AggieHome home) {
 

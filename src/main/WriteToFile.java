@@ -1,3 +1,4 @@
+package main;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +7,10 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import dr.EnergyMgmt4;
+
 public class WriteToFile {
-	public void SetDatalog(AggieHome home,EnergyMgmt3 energyMgmt2){
+	public void SetDatalog(AggieHome home,EnergyMgmt4 energyMgmt2){
 		// here we write the data to a txt file
 	       try{  
 	    	   SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
@@ -44,9 +47,9 @@ public class WriteToFile {
 	           out.write(","+String.format("%.1f", home.pG));
 	           out.write(","+String.format("%.1f", home.pH));
 	           out.write(","+String.format("%.1f", home.pP));
-	           out.write(","+String.format("%03d", energyMgmt2.step));
-	           out.write(","+String.format("%.1f", energyMgmt2.power));
-	           out.write(","+String.format("%.2f", energyMgmt2.logEnd1[0]));
+	           out.write(","+String.format("%03d", 1));//energyMgmt2.getPs()));
+	           out.write(","+String.format("%.1f", energyMgmt2.getPower()));
+	           out.write(","+String.format("%.2f", 0.5));//energyMgmt2.logEnd1[0]));
 	           
 	           // control data
 	           for (int p = 0; p < home.battery.nS; p++){
