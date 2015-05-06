@@ -22,8 +22,13 @@ public class ReturnValue implements Comparable<ReturnValue> {
 	@Override
 	public int compareTo(ReturnValue o) {
 		double comparePrice = ((ReturnValue)o).getValue();
+		if (comparePrice == this.value){
+			return 0;
+		} else if(comparePrice > this.value){
+			return 1;
+		}else
+			return -1;
 		
-		return (int) (comparePrice - this.value);
 	}
 	
 	public String toString(){
