@@ -111,10 +111,10 @@ public class EnergyMgmt4 {
 		double price = priceList.get(hrNow).getValue();
 		System.out.println("Time is: " + time + " The price now is " + price);
 		if (price > peakPrice) {
-		//	System.out.println("So expensive.....");
+			// System.out.println("So expensive.....");
 			return true;
 		} else {
-		//	System.out.println("ehh.. cheap electricity");
+			// System.out.println("ehh.. cheap electricity");
 			return false;
 		}
 
@@ -122,13 +122,15 @@ public class EnergyMgmt4 {
 
 	public void offpeak(AggieHome home) {
 		System.out.println("Now using the offpeak time algo");
-		if (bs == BatteryState.FULL & !done) {
+		if (bs != BatteryState.FULL & !done) {
 			this.netZero(home);
+			System.out.println("offpeak charging");
 			if (this.power < 0) {
 				this.power = 0.05;
 			}
 			this.setPower(home, this.power);
 		} else if (bs == BatteryState.FULL | done) {
+			System.out.println("Battery done charging");
 			done = true;
 			this.setPower(home, this.power = -1);
 		} else {
@@ -144,6 +146,7 @@ public class EnergyMgmt4 {
 	public void peak(AggieHome home) {
 		System.out.println("Now using the peak time algo");
 		if (bs != BatteryState.EMPTY & !done) {
+			System.out.println("Battery discharging");
 			this.netDischarge(home);
 			if (this.power > 0) {
 				this.power = -2;
@@ -151,6 +154,7 @@ public class EnergyMgmt4 {
 			this.setPower(home, this.power);
 			done = false;
 		} else if (bs == BatteryState.EMPTY | done) {
+			System.out.println("Battery done discharging");
 			done = true;
 			this.setPower(home, this.power = 2);
 
@@ -158,14 +162,14 @@ public class EnergyMgmt4 {
 			done = true;
 			this.setPower(home, this.power = 2);
 		}
-		if(!overPrice(new Date().getHours())){
+		if (!overPrice(new Date().getHours())) {
 			ps = PriceState.OFFPEAK;
 			done = false;
 		}
 	}
 
 	public void peakOffpeak(AggieHome home, CANRead canPort) {
-		switch(ps){
+		switch (ps) {
 		case PEAK:
 			peak(home);
 			break;
@@ -173,7 +177,9 @@ public class EnergyMgmt4 {
 			offpeak(home);
 			break;
 		}
-		if (canPort.mode==false){this.power=0.0;}
+		if (canPort.mode == false) {
+			this.power = 0.0;
+		}
 
 	}
 
@@ -182,7 +188,7 @@ public class EnergyMgmt4 {
 		batteryStateUpdate(home);
 		peakOffpeak(home, canPort);
 	}
-	
+
 	public int dateCount(String day) {
 		if (day.equals("today")) {
 			System.out.println("Today's data is called");
@@ -217,8 +223,6 @@ public class EnergyMgmt4 {
 		}
 
 	}
-
-	
 
 	public void setPower(AggieHome home, double pow) { // AggieHome home,double
 														// pow
@@ -298,19 +302,23 @@ public class EnergyMgmt4 {
 		if (curHour >= 16 & !tmrDataStatus) { // new Date().getHours()
 			System.out.println("New day data is retriving");
 			retriveData("tomorrow");
-			printData(priceListTmr);
-			tmrDataStatus = true;
+			
+			if (!priceListTmr.isEmpty()) {
+				
+				tmrDataStatus = true;
+				System.out.println("Tomorrow's data is valid");
+				printData(priceListTmr);
+			}
 		}
 		if (curHour == 0 & tmrDataStatus) { // new Date().getHours()
 			System.out.println("New day, data reset");
-			if (!priceListTmr.isEmpty()) {
-				priceList.clear();
-				priceList = new ArrayList<ReturnValue>(priceListTmr);
-				priceListTmr.clear();
-				printData(priceList);
-				peakPrice = findThreshold();
-				tmrDataStatus = false;
-			}
+
+			priceList.clear();
+			priceList = new ArrayList<ReturnValue>(priceListTmr);
+			priceListTmr.clear();
+			printData(priceList);
+			peakPrice = findThreshold();
+			tmrDataStatus = false;
 
 		}
 	}
@@ -318,7 +326,7 @@ public class EnergyMgmt4 {
 	public void run() {
 		checkData(new Date().getHours());
 		System.out.println("Threshold price is: " + peakPrice);
-		//batteryResponse();
+		// batteryResponse();
 		// testHour = (testHour + 1)%24;
 		// suggest to run once every hour
 	}
