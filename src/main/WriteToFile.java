@@ -61,6 +61,8 @@ public class WriteToFile {
 	           out.write(","+String.format("%.4f", home.battery.cell[p].sohP));
 	           out.write(","+String.format("%.4f", home.battery.cell[p].sohC));
 	           }
+	           out.write(","+String.format("%.4f", energyMgmt2.getPeakPrice()));
+	           out.write(","+String.format("%.4f", energyMgmt2.getPrice()));
 	           // out.write(","+String.format("%.4f", batteryPack.energy24Hours.get(14)));
 	           // 
 	           out.write("\n");

@@ -20,6 +20,7 @@ public class EnergyMgmt4 {
 	private PriceState ps;
 	private double peakPrice;
 	private boolean done;
+	private double price;
 
 	// private int testHour;
 	private double power;
@@ -108,9 +109,9 @@ public class EnergyMgmt4 {
 		// if not return false
 		// getCurrentHour
 		int time = priceList.get(hrNow).getHour();
-		double price = priceList.get(hrNow).getValue();
+		price = priceList.get(hrNow).getValue();
 		System.out.println("Time is: " + time + " The price now is " + price);
-		if (price > peakPrice) {
+		if (price >= peakPrice) {
 			// System.out.println("So expensive.....");
 			return true;
 		} else {
@@ -122,12 +123,17 @@ public class EnergyMgmt4 {
 
 	public void offpeak(AggieHome home) {
 		System.out.println("Now using the offpeak time algo");
+//		if(bs == BatteryState.EMPTY){
+//			done = true;
+//			System.out.println("Off peak, but battery empty");
+//			this.setPower(home,this.power = 2);
+//		}
 		if (bs != BatteryState.FULL & !done) {
 			this.netZero(home);
 			System.out.println("offpeak charging");
-			if (this.power < 0) {
-				this.power = 0.05;
-			}
+//			if (this.power < 0) {
+//				this.power = 0.05;
+//			}
 			this.setPower(home, this.power);
 		} else if (bs == BatteryState.FULL | done) {
 			System.out.println("Battery done charging");
@@ -200,11 +206,11 @@ public class EnergyMgmt4 {
 		return 0;
 	}
 
-	public void retriveData(String day) {
+	public void retriveData(String day) { //string day
 		Date dt = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(dt);
-		c.add(Calendar.DATE, dateCount(day));
+		c.add(Calendar.DATE, dateCount(day)); //dateCount(day)
 		dt = c.getTime();
 
 		Connection connection = new Connection();
@@ -234,14 +240,14 @@ public class EnergyMgmt4 {
 			this.power = -2000;
 		}
 		if (home.battery.vMin < 2.80 | this.chCnt > 1) {
-			this.power = 50;
+			this.power = 200;
 			this.chCnt = this.chCnt - 1;
 			if (home.battery.vMin < 2.80) {
 				this.chCnt = 21;
 			}
 		}
 		if (home.battery.vMax > 3.65 | this.dschCnt > 1) {
-			this.power = -50;
+			this.power = -200;
 			this.dschCnt = this.dschCnt - 1;
 			if (home.battery.vMax > 3.6) {
 				this.dschCnt = 21;
@@ -270,7 +276,7 @@ public class EnergyMgmt4 {
 
 	public void netZero(AggieHome home) {
 		if (home.pG != home.pGold) {
-			double pow = home.pG * 0.2;// +(home.pG-home.pGold)+(home.pP-home.pPold)
+			double pow = home.pG * 0.3;// +(home.pG-home.pGold)+(home.pP-home.pPold)
 			// double pow = (500 - home.pG) * 0.2; // new
 			if (pow > 500) {
 				pow = 500;
@@ -365,6 +371,10 @@ public class EnergyMgmt4 {
 
 	public PriceState getPs() {
 		return ps;
+	}
+
+	public double getPrice() {
+		return price;
 	}
 
 }
