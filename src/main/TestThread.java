@@ -19,6 +19,7 @@ class MultiThread {
 	EnergyMgmt2 energyMgmt2 = new EnergyMgmt2();// normal routing
 	EnergyMgmt3 energyMgmt3 = new EnergyMgmt3();// normal routing
 	EnergyMgmt4 energyMgmt4 = new EnergyMgmt4();
+	EnergyMgmtCal energyMgmtCal = new EnergyMgmtCal();
 	//generate classes for sma read/write, 
 	SMA smaPort2 = new SMA();
 	//and xml file read
@@ -46,15 +47,18 @@ class MultiThread {
  	    home.pG=obviusPort.va; // negative being back feeding
  	    home.pB=home.battery.cPack*home.battery.vPack;
 	    home.pH=home.pP-home.pB-home.pG;
-	    energyMgmt4.SetPower(home,canPort); //here sets power
-	    smaPort2.setParameters(energyMgmt4.getPower());
-//    	System.out.println("Thread HOUSE");
+	    //energyMgmt4.SetPower(home,canPort); //here sets power
+	    energyMgmtCal.SetPower(home);
+	    smaPort2.setParameters(energyMgmtCal.getPower());
+	    //smaPort2.setParameters(energyMgmt4.getPower());
+//    	
+	    System.out.println("Thread HOUSE");
         notify();
     }
     public synchronized void CloudThread() throws IOException {
     	// step 4. variables print out & data logging
-	    printOut.SetPrint(home,canPort,energyMgmt4);
-	    writeToFile.SetDatalog(home, energyMgmt4);
+	    printOut.SetPrint(home,canPort,energyMgmtCal);
+	    writeToFile.SetDatalog(home, energyMgmtCal);
 	    writeToDB.setDataBase(home);
 	    //System.out.println("Thread CLOUD");
         notify();

@@ -10,7 +10,7 @@ import java.util.Date;
 import dr.EnergyMgmt4;
 
 public class WriteToFile {
-	public void SetDatalog(AggieHome home,EnergyMgmt4 energyMgmt2){
+	public void SetDatalog(AggieHome home,EnergyMgmtCal energyMgmt2){
 		// here we write the data to a txt file
 	       try{  
 	    	   SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
@@ -61,8 +61,8 @@ public class WriteToFile {
 	           out.write(","+String.format("%.4f", home.battery.cell[p].sohP));
 	           out.write(","+String.format("%.4f", home.battery.cell[p].sohC));
 	           }
-	           out.write(","+String.format("%.4f", energyMgmt2.getPeakPrice()));
-	           out.write(","+String.format("%.4f", energyMgmt2.getPrice()));
+	           //out.write(","+String.format("%.4f", energyMgmt2.getPeakPrice()));
+	           //out.write(","+String.format("%.4f", energyMgmt2.getPrice()));
 	           // out.write(","+String.format("%.4f", batteryPack.energy24Hours.get(14)));
 	           // 
 	           out.write("\n");

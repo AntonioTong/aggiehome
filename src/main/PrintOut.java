@@ -3,12 +3,12 @@ package main;
 import dr.EnergyMgmt4;
 
 public class PrintOut {
-  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmt4 energyMgmt2){
+  public void SetPrint(AggieHome home,CANRead canPort,EnergyMgmtCal energyMgmt2){
 	  
 	  	if (home.mode==true & canPort.mode==true ){
 	   	 System.out.format("power %.2f ",energyMgmt2.getPower());
 	   	 System.out.format("step %d ", 1); //energyMgmt2.getPs());
-	   	System.out.println(energyMgmt2.isDone());
+	   	//System.out.println(energyMgmt2.isDone());
 	  	 //System.out.format("socSet %.2f ",energyMgmt2.logEnd1[0]);
 		// time 
 	  	 System.out.format("dt %.2f ", home.time.timeDt);
