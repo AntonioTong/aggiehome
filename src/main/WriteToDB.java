@@ -27,7 +27,7 @@ public class WriteToDB {
 			MongoClient mongoClient = new MongoClient(uri);
 			DB db = mongoClient.getDB(uri.getDatabase());
 			System.out.println("Connect to database successfully");
-			DBCollection testJson = db.getCollection("houseData");
+			DBCollection testJson = db.getCollection("calibration");
 			testJson.insert(data);
 //			DBCursor cursor = testJson.find();
 //			int i=1;
