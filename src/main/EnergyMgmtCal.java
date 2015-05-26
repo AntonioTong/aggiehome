@@ -88,7 +88,7 @@ public class EnergyMgmtCal {
 		// for (int j = 0; j < 1500; j++) {
 		System.out.println("time is now " + timeNow.toString());
 		if (timeNow.after(profileTime.get(counter)) & counter % 2 == 0) {
-			System.out.println("charging");
+			System.out.println("discharging");
 			discharge(home);
 			counter++;
 		} else if (timeNow.after(profileTime.get(counter)) & counter % 2 != 0) {
@@ -97,11 +97,11 @@ public class EnergyMgmtCal {
 			counter++;
 		}
 
-		cal.add(Calendar.MINUTE, 5);
-		timeNow = cal.getTime();
-		if (counter > 30) {
-			System.out.println("Done");
-		}
+		//cal.add(Calendar.MINUTE, 5);
+		//timeNow = cal.getTime();
+		//if (counter > 30) {
+		//	System.out.println("Done");
+	//	}
 		// }
 	}
 
