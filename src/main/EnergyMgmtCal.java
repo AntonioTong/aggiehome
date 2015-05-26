@@ -26,18 +26,21 @@ public class EnergyMgmtCal {
 	}
 
 	public void charge(AggieHome home) {
-		
-			this.power = 2000.0;
-			if(home.battery.vMax>3.6){ // prevent overcharge
-				this.power = 0;
-			}
+
+		this.power = 1000.0;
+		if (home.battery.vMax > 3.6) { // prevent overcharge
+			this.power = 0;
+		}
 
 	}
 
-	// public void discharge() {
-	// // if(voltage < 2.9) dont discharge
-	// this.dschCnt = 20;
-	// } no need for now
+	public void discharge(AggieHome home) {
+		this.power = -1000.0;
+		if (home.battery.vMin < 2.9) { // dont discharge
+			this.power = 0;
+		}
+		// this.dschCnt = 20;
+	} // no need for now
 
 	public void rest() {
 		this.power = 0.0;
@@ -70,10 +73,10 @@ public class EnergyMgmtCal {
 		// System.out.println("Charge");
 		// System.out.println(chargeSchedule.get(i).toString());
 		// }
-//		for (int i = 0; i < profileTime.size(); i++) {
-//			System.out.println(i);
-//			System.out.println(profileTime.get(i).toString());
-//		}
+		// for (int i = 0; i < profileTime.size(); i++) {
+		// System.out.println(i);
+		// System.out.println(profileTime.get(i).toString());
+		// }
 
 	}
 
@@ -82,27 +85,27 @@ public class EnergyMgmtCal {
 		Date timeNow = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(timeNow);
-		//for (int j = 0; j < 1500; j++) {
-			System.out.println("time is now "+ timeNow.toString());
-			if (timeNow.after(profileTime.get(counter)) & counter % 2 == 0) {
-				System.out.println("charging");
-				charge(home);
-				counter++;
-			} else if (timeNow.after(profileTime.get(counter)) & counter % 2 != 0) {
-				System.out.println("Rest");
-				rest();
-				counter++;
-			}
+		// for (int j = 0; j < 1500; j++) {
+		System.out.println("time is now " + timeNow.toString());
+		if (timeNow.after(profileTime.get(counter)) & counter % 2 == 0) {
+			System.out.println("charging");
+			discharge(home);
+			counter++;
+		} else if (timeNow.after(profileTime.get(counter)) & counter % 2 != 0) {
+			System.out.println("Rest");
+			rest();
+			counter++;
+		}
 
-			cal.add(Calendar.MINUTE, 5);
-			timeNow = cal.getTime();
-			if(counter > 30){
-				System.out.println("Done");
-			}
-		//}
+		cal.add(Calendar.MINUTE, 5);
+		timeNow = cal.getTime();
+		if (counter > 30) {
+			System.out.println("Done");
+		}
+		// }
 	}
-	
-	public void SetPower(AggieHome home){
+
+	public void SetPower(AggieHome home) {
 		run(home);
 	}
 
@@ -113,5 +116,5 @@ public class EnergyMgmtCal {
 	public ArrayList<Date> getProfileTime() {
 		return profileTime;
 	}
-	
+
 }
